@@ -30,7 +30,17 @@ angular.module('test3app',[])
     // отправить POST-запрос с ФИО и email на URL '/' и при получении
     // ответа скрыть форму и показать сообщение "Регистрация выполнена успешно"
     $scope.submit = function() {
-        
+        if (checkEmail(this.email) == true){
+            $http.post('/', {
+                name: this.name,
+                email: this.email
+            }).then(function () {
+                $scope.registered = true;
+            });
+        }
+        else{
+            this.incorrectEmail = true;
+        }
     };
 });
 
